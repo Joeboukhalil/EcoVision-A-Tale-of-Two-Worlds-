@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Eco VR Tour</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <style>body { margin: 0; }</style>
+  </head>
+  <body>
+    <a-scene vr-mode-ui="enabled: true" device-orientation-permission-ui="enabled: true">
+
+      <!-- Sky Background -->
+      <a-sky id="sky" src="images/forest_clean.jpg" rotation="0 180 0"></a-sky>
+
+      <!-- Stabilized Camera Configuration -->
+      <a-entity 
+        camera 
+        look-controls="enabled: true; magicWindowTrackingEnabled: true; dampingFactor: 0.2" 
+        position="0 1.6 0">
+        <a-cursor
+          fuse="true"
+          fuse-timeout="1500"
+          geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02"
+          material="color: white; shader: flat">
+        </a-cursor>
+      </a-entity>
+
+      <!-- Text Label -->
+      <a-text id="infoText"
+              value="Welcome to the Clean Forest"
+              position="0 2 -3"
+              align="center"
+              color="#FFF"
+              width="4">
+      </a-text>
+
+      <!-- Buttons for Selecting Different Environments -->
+      <a-box id="cleanForest" position="-2 1 -3" color="green" class="clickable">
+        <a-text value="Clean Forest" align="center" color="#FFF" position="0 0.6 0" width="2"></a-text>
+      </a-box>
+
+      <a-box id="pollutedForest" position="2 1 -3" color="brown" class="clickable">
+        <a-text value="Polluted Forest" align="center" color="#FFF" position="0 0.6 0" width="2"></a-text>
+      </a-box>
+
+      <a-box id="cleanOcean" position="-2 0 -3" color="blue" class="clickable">
+        <a-text value="Clean Ocean" align="center" color="#FFF" position="0 0.6 0" width="2"></a-text>
+      </a-box>
+
+      <a-box id="pollutedOcean" position="2 0 -3" color="gray" class="clickable">
+        <a-text value="Polluted Ocean" align="center" color="#FFF" position="0 0.6 0" width="2"></a-text>
+      </a-box>
+
+    </a-scene>
+
+    <script>
+      const sky = document.getElementById('sky');
+      const infoText = document.getElementById('infoText');
+
+      document.getElementById('cleanForest').addEventListener('click', () => {
+        sky.setAttribute('src', 'cleanforest.jpg');
+        infoText.setAttribute('value', 'Welcome to the Clean Forest');
+      });
+
+      document.getElementById('pollutedForest').addEventListener('click', () => {
+        sky.setAttribute('src', 'Polluted_1.jpg');
+        infoText.setAttribute('value', 'This is the Polluted Forest');
+      });
+
+      document.getElementById('cleanOcean').addEventListener('click', () => {
+        sky.setAttribute('src', 'Cleanbeach.jpg');
+        infoText.setAttribute('value', 'Welcome to the Clean Ocean');
+      });
+
+      document.getElementById('pollutedOcean').addEventListener('click', () => {
+        sky.setAttribute('src', 'Pollutedbeach.jpg');
+        infoText.setAttribute('value', 'This is the Polluted Ocean');
+      });
+    </script>
+  </body>
+</html>
